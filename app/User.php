@@ -27,11 +27,11 @@ class User extends Authenticatable
     'password', 'remember_token',
   ];
   /**
-  * gender One To One
+  * gender One To Many (Inverse)
   *
   */
   public function gender()
   {
-    return $this->hasOne('App\Gender', 'id', 'gender_id');
+    return $this->belongsTo('App\Gender', 'gender_id', 'id');
   }
 }

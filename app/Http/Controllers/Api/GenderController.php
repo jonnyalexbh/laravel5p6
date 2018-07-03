@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Gender;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class GenderController extends Controller
 {
   /**
   * index
@@ -13,8 +14,8 @@ class UserController extends Controller
   */
   public function index()
   {
-    $users = User::all();
-    return view('users.index', compact('users'));
+    $genders = Gender::with('users')->get();
+    return response()->json(['data' => $genders], 200);
   }
 
   /**
