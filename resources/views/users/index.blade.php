@@ -17,6 +17,7 @@
                   <td>Gender</td>
                   <td>Email</td>
                   <td>Phone</td>
+                  <td>Active</td>
                 </tr>
               </thead>
               @foreach ($users as $user)
@@ -28,6 +29,7 @@
                     <td>{{ $user->gender->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->phone }}</td>
+                    <td>{{ $user->admin }}</td>
                   </tr>
                 </tbody>
               @endforeach

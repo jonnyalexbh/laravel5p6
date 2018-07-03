@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
   use Notifiable;
-
   /**
   * The attributes that are mass assignable.
   *
@@ -17,7 +16,11 @@ class User extends Authenticatable
   protected $fillable = [
     'name', 'email', 'password',
   ];
-
+  /**
+  * appending values to JSON
+  *
+  */
+  protected $appends = ['admin'];
   /**
   * The attributes that should be hidden for arrays.
   *
@@ -33,6 +36,24 @@ class User extends Authenticatable
   public function gender()
   {
     return $this->belongsTo('App\Gender', 'gender_id', 'id');
+  }
+  /**
+  * accessors
+  *
+  */
+  public function getAdminAttribute() {
+    if ($this->id == 1 && $this->is_active == 1) {
+      return $this->id.' is admin';
+    }
+    if ($this->id == 2 && $this->is_active == 1) {
+      return $this->id.' is admin';
+    }
+    return 'undefined';
+  }
+
+  public function getNameAttribute($value)
+  {
+    return ucwords(strtolower($value));
   }
   /**
   * scopeActive
