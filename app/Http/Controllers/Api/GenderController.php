@@ -33,7 +33,8 @@ class GenderController extends Controller
   */
   public function store(Request $request)
   {
-    //
+    $gender = Gender::create($request->all());
+    return response()->json(['data' => $gender], 201);
   }
 
   /**
