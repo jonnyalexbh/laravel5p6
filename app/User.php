@@ -27,11 +27,27 @@ class User extends Authenticatable
     'password', 'remember_token',
   ];
   /**
-  * gender One To Many (Inverse)
+  * relationship gender One To Many (Inverse)
   *
   */
   public function gender()
   {
     return $this->belongsTo('App\Gender', 'gender_id', 'id');
+  }
+  /**
+  * scopeActive
+  *
+  */
+  public function scopeActive($query)
+  {
+    return $query->where('is_active', 1);
+  }
+  /**
+  * scopeOfGender
+  *
+  */
+  public function scopeOfGender($query, $gender)
+  {
+    return $query->where('gender_id', $gender);
   }
 }

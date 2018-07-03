@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('users', 'Api\UserController');
 Route::resource('genders', 'Api\GenderController', ['only' => ['index', 'show']]);
+/**
+* scopes & dynamic scopes
+*
+*/
+Route::get('scope-user-active', function(){
+  return \App\User::active()->get();
+});
+
+Route::get('scope-user-gender', function(){
+  return \App\User::OfGender('2')->get();
+});

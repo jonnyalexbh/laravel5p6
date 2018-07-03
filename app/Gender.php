@@ -8,7 +8,7 @@ class Gender extends Model
 {
   protected $table = 'genders';
   /**
-  * users One To Many
+  * relationship users One To Many
   *
   */
   public function users()
