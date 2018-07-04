@@ -12,6 +12,6 @@ class MaritalStatus extends Model
   */
   public function users()
   {
-    return $this->hasMany('App\User');
+    return $this->hasMany('App\User')->where('is_active', 1)->orderBy('name');
   }
 }
