@@ -16,7 +16,8 @@ class CreateMaritalStatusesTable extends Migration
     Schema::create('marital_statuses', function (Blueprint $table) {
       $table->increments('id');
       $table->string('name', 62);
-      $table->timestamps();
+      $table->timestamp('date_created')->nullable();
+      $table->timestamp('date_modified')->nullable();
     });
   }
 
