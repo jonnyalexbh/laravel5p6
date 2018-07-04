@@ -37,6 +37,11 @@ class User extends Authenticatable
   {
     return $this->belongsTo('App\Gender', 'gender_id', 'id');
   }
+
+  public function marital_status()
+  {
+    return $this->belongsTo('App\MaritalStatus');
+  }
   /**
   * accessors
   *

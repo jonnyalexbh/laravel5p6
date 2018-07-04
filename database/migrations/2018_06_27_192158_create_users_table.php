@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
       $table->string('name');
       $table->date('dt_birth');
       $table->unsignedInteger('gender_id');
+      $table->unsignedInteger('marital_status_id')->nullable();
       $table->string('email')->unique();
       $table->string('phone', 20);
       $table->string('mobile', 20)->nullable();
@@ -27,6 +28,7 @@ class CreateUsersTable extends Migration
       $table->timestamps();
 
       $table->foreign('gender_id')->references('id')->on('genders');
+      $table->foreign('marital_status_id')->references('id')->on('marital_statuses');
     });
   }
 

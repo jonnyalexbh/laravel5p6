@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('users', 'Api\UserController');
 Route::resource('genders', 'Api\GenderController', ['only' => ['index', 'store']]);
+Route::resource('marital-statuses', 'Api\MaritalStatusController');
 /**
 * scopes & dynamic scopes
 *

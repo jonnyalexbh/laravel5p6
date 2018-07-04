@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Gender;
+use App\MaritalStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
-class GenderController extends ApiController
+class MaritalStatusController extends ApiController
 {
   /**
   * index
@@ -14,10 +14,9 @@ class GenderController extends ApiController
   */
   public function index()
   {
-    $genders = Gender::with('users')->get();
-    return response()->json(['data' => $genders], 200);
+    $marital_statuses =  MaritalStatus::with('users')->get();
+    return $this->showAll($marital_statuses);
   }
-
   /**
   * create
   *
@@ -26,17 +25,14 @@ class GenderController extends ApiController
   {
     //
   }
-
   /**
   * store
   *
   */
   public function store(Request $request)
   {
-    $gender = Gender::create($request->all());
-    return response()->json(['data' => $gender], 201);
+    //
   }
-
   /**
   * show
   *
@@ -45,7 +41,6 @@ class GenderController extends ApiController
   {
     //
   }
-
   /**
   * edit
   *
@@ -54,7 +49,6 @@ class GenderController extends ApiController
   {
     //
   }
-
   /**
   * update
   *
@@ -63,7 +57,6 @@ class GenderController extends ApiController
   {
     //
   }
-
   /**
   * destroy
   *

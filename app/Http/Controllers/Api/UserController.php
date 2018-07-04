@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
   /**
   * index
@@ -14,7 +14,7 @@ class UserController extends Controller
   */
   public function index()
   {
-    $users = User::with('gender')->get();
+    $users = User::with('gender', 'marital_status')->get();
     return response()->json(['data' => $users], 200);
   }
 

@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
       'name' => 'Daniela Tobon',
       'dt_birth' => Carbon::now(),
       'gender_id' => \App\Gender::all()->random()->id,
+      'marital_status_id' => \App\MaritalStatus::all()->random()->id,
       'email' => 'test@gmail.com',
       'phone' => '3810025',
       'password' => bcrypt('secret')
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
           'name' => 'Alexander Lopez',
           'dt_birth' => Carbon::now(),
           'gender_id' => \App\Gender::all()->random()->id,
+          'marital_status_id' => \App\MaritalStatus::all()->random()->id,
           'email' => 'alex@gmail.com',
           'phone' => '3818225',
           'password' => bcrypt('secret')
@@ -36,6 +38,7 @@ class UsersTableSeeder extends Seeder
           'name' => 'Carlos Ortiz',
           'dt_birth' => Carbon::now(),
           'gender_id' => \App\Gender::all()->random()->id,
+          'marital_status_id' => \App\MaritalStatus::all()->random()->id,
           'email' => 'ortis@hotmail.com',
           'phone' => '3028525',
           'password' => bcrypt('secret')
