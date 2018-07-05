@@ -3,10 +3,15 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Traits\ApiResponser;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
+  use ApiResponser;
+
   /**
   * A list of the exception types that are not reported.
   *
@@ -46,6 +51,16 @@ class Handler extends ExceptionHandler
   */
   public function render($request, Exception $exception)
   {
+    // the request contains a type (GET, PUT, POST etc) that is not used in this API
+    if ($exception instanceof MethodNotAllowedHttpException) {
+      return $this->errorResponse('The specified method for the request is invalid', 405);
+    }
+
+    // basically an invalid path in the request
+    if ($exception instanceof NotFoundHttpException) {
+      return $this->errorResponse('The specified URL cannot be found', 404);
+    }
+
     return parent::render($request, $exception);
   }
 }
