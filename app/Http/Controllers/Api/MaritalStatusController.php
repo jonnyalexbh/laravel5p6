@@ -14,16 +14,8 @@ class MaritalStatusController extends ApiController
   */
   public function index()
   {
-    $marital_statuses =  MaritalStatus::with('users')->get();
+    $marital_statuses = MaritalStatus::with('users')->get();
     return $this->showAll($marital_statuses);
-  }
-  /**
-  * create
-  *
-  */
-  public function create()
-  {
-    //
   }
   /**
   * store
@@ -31,7 +23,8 @@ class MaritalStatusController extends ApiController
   */
   public function store(Request $request)
   {
-    //
+    $marital_status = MaritalStatus::create($request->all());
+    return $this->showOne($marital_status, 201);
   }
   /**
   * show
@@ -39,23 +32,25 @@ class MaritalStatusController extends ApiController
   */
   public function show($id)
   {
-    //
-  }
-  /**
-  * edit
-  *
-  */
-  public function edit($id)
-  {
-    //
+    $marital_status = MaritalStatus::findOrFail($id);
+    return $this->showOne($marital_status);
   }
   /**
   * update
   *
   */
-  public function update(Request $request, $id)
+  public function update(Request $request, MaritalStatus $marital_status)
   {
-    //
+    if ($request->has('name')) {
+      $marital_status->name = $request->name;
+    }
+
+    if (!$marital_status->isDirty()) {
+      return $this->errorResponse('You need to specify a different value to update', 422);
+    }
+
+    $marital_status->save();
+    return $this->showOne($marital_status);
   }
   /**
   * destroy
@@ -63,6 +58,8 @@ class MaritalStatusController extends ApiController
   */
   public function destroy($id)
   {
-    //
+    $marital_status = MaritalStatus::findOrFail($id);
+    $marital_status->delete();
+    return $this->showOne($marital_status);
   }
 }
