@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('password_expired');
 Route::resource('users', 'UserController', ['only' => ['index']]);
+Route::resource('genders', 'GenderController');
 
 Route::get('password/expired', 'Auth\ExpiredPasswordController@expired')->name('password.expired');
 Route::post('password/post_expired', 'Auth\ExpiredPasswordController@postExpired')->name('password.post_expired');
