@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use App\Traits\ApiResponser;
+use Illuminate\Database\QueryException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -59,6 +60,14 @@ class Handler extends ExceptionHandler
     // basically an invalid path in the request
     if ($exception instanceof NotFoundHttpException) {
       return $this->errorResponse('The specified URL cannot be found', 404);
+    }
+
+    // QueryException
+    if ($exception instanceof QueryException) {
+      $errorCode = $exception->errorInfo[1];
+      if ($errorCode == 1451) {
+        return $this->errorResponse('Cannot remove this resource permanently as it is related with another resource', 409);
+      }
     }
 
     return parent::render($request, $exception);

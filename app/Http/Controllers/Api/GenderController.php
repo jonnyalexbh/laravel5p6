@@ -17,16 +17,6 @@ class GenderController extends ApiController
     $genders = Gender::with('users')->get();
     return response()->json(['data' => $genders], 200);
   }
-
-  /**
-  * create
-  *
-  */
-  public function create()
-  {
-    //
-  }
-
   /**
   * store
   *
@@ -36,40 +26,41 @@ class GenderController extends ApiController
     $gender = Gender::create($request->all());
     return response()->json(['data' => $gender], 201);
   }
-
   /**
   * show
   *
   */
   public function show($id)
   {
-    //
+    $gender = Gender::findOrFail($id);
+    return response()->json(['data' => $gender], 200);
   }
-
-  /**
-  * edit
-  *
-  */
-  public function edit($id)
-  {
-    //
-  }
-
   /**
   * update
   *
   */
   public function update(Request $request, $id)
   {
-    //
-  }
+    $gender = Gender::findOrFail($id);
 
+    if ($request->has('name')) {
+      $gender->name = $request->name;
+    }
+
+    if (!$gender->isDirty()) {
+      return response()->json(['error' => 'You need to specify a different value to update', 'code' => 422], 422);
+    }
+
+    $gender->save();
+    return response()->json(['data' => $gender], 200);
+  }
   /**
   * destroy
   *
   */
   public function destroy($id)
   {
-    //
+    $gender = Gender::destroy($id);
+    return response()->json(['data' => $gender], 200);
   }
 }
