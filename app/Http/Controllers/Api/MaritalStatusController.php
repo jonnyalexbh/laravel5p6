@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use Validator;
 use App\MaritalStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\MaritalStatusRequest;
 
 class MaritalStatusController extends ApiController
 {
@@ -21,7 +23,7 @@ class MaritalStatusController extends ApiController
   * store
   *
   */
-  public function store(Request $request)
+  public function store(MaritalStatusRequest $request)
   {
     $marital_status = MaritalStatus::create($request->all());
     return $this->showOne($marital_status, 201);
@@ -41,6 +43,16 @@ class MaritalStatusController extends ApiController
   */
   public function update(Request $request, MaritalStatus $marital_status)
   {
+    $fields = $request->all();
+
+    $validator = Validator::make($fields, [
+      'name' => 'required'
+    ]);
+
+    if($validator->fails()){
+      return $this->validationErrors('Validation error.', $validator->errors());
+    }
+
     if ($request->has('name')) {
       $marital_status->name = $request->name;
     }
