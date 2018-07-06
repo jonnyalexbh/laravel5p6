@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Gender;
 use Illuminate\Http\Request;
+use App\Http\Requests\GenderRequest;
 use App\Http\Controllers\ApiController;
 
 class GenderController extends ApiController
@@ -21,7 +22,7 @@ class GenderController extends ApiController
   * store
   *
   */
-  public function store(Request $request)
+  public function store(GenderRequest $request)
   {
     $gender = Gender::create($request->all());
     return response()->json(['data' => $gender], 201);

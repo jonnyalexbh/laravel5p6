@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use App\Traits\ApiResponser;
 use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -71,5 +72,14 @@ class Handler extends ExceptionHandler
     }
 
     return parent::render($request, $exception);
+  }
+  /**
+  * convertValidationExceptionToResponse
+  *
+  */
+  protected function convertValidationExceptionToResponse(ValidationException $e, $request)
+  {
+    $errors = $e->validator->errors()->getMessages();
+    return $this->errorResponse($errors, 422);
   }
 }
