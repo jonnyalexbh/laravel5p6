@@ -17,6 +17,7 @@
                   <td>Gender</td>
                   <td>Email</td>
                   <td>Phone</td>
+                  <td>Admin</td>
                   <td>Active</td>
                 </tr>
               </thead>
@@ -30,6 +31,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->admin }}</td>
+                    <td>{{ $user->isActive() }}</td>
                   </tr>
                 </tbody>
               @endforeach

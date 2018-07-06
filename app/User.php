@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
   use Notifiable;
+
+  const IS_ACTIVE = '1';
+  const IS_NOT_ACTIVE = '0';
+
   /**
   * The attributes that are mass assignable.
   *
@@ -59,6 +63,21 @@ class User extends Authenticatable
   public function getNameAttribute($value)
   {
     return ucwords(strtolower($value));
+  }
+  /**
+  * isActive
+  *
+  */
+  public function isActive()
+  {
+    if($this->is_active == User::IS_ACTIVE) {
+      return 'is active';
+    } elseif($this->is_active == User::IS_NOT_ACTIVE) {
+      return 'it is not active';
+    }
+    else {
+      return 'Stateless';
+    }
   }
   /**
   * scopeActive

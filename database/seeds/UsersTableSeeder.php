@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,7 +20,8 @@ class UsersTableSeeder extends Seeder
       'marital_status_id' => \App\MaritalStatus::all()->random()->id,
       'email' => 'test@gmail.com',
       'phone' => '3810025',
-      'password' => bcrypt('secret')
+      'password' => bcrypt('secret'),
+      'is_active' => \App\User::IS_ACTIVE,
     ]);
 
 
@@ -32,7 +34,8 @@ class UsersTableSeeder extends Seeder
           'marital_status_id' => \App\MaritalStatus::all()->random()->id,
           'email' => 'alex@gmail.com',
           'phone' => '3818225',
-          'password' => bcrypt('secret')
+          'password' => bcrypt('secret'),
+          'is_active' => \App\User::IS_NOT_ACTIVE
         ],
         [
           'name' => 'Carlos Ortiz',
@@ -41,7 +44,8 @@ class UsersTableSeeder extends Seeder
           'marital_status_id' => \App\MaritalStatus::all()->random()->id,
           'email' => 'ortis@hotmail.com',
           'phone' => '3028525',
-          'password' => bcrypt('secret')
+          'password' => bcrypt('secret'),
+          'is_active' => \App\User::IS_ACTIVE
         ]
       ]
     );
