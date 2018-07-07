@@ -18,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
   return $request->user();
 });
 
-Route::resource('users', 'Api\UserController');
-Route::resource('genders', 'Api\GenderController', ['except' => ['edit', 'create']]);
-Route::resource('marital-statuses', 'Api\MaritalStatusController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+Route::apiResource('users', 'Api\UserController');
+Route::resource('genders', 'Api\GenderController')->except(['create', 'edit']);
+Route::resource('marital-statuses', 'Api\MaritalStatusController')->only(['index', 'store', 'show', 'update', 'destroy']);
 /**
 * scopes & dynamic scopes
 *
