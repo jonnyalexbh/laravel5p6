@@ -21,6 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('users', 'Api\UserController');
 Route::resource('genders', 'Api\GenderController')->except(['create', 'edit']);
 Route::resource('marital-statuses', 'Api\MaritalStatusController')->only(['index', 'store', 'show', 'update', 'destroy']);
+Route::apiResources([
+  'books' => 'Api\BookController',
+  'categories' => 'Api\CategoryController'
+]);
 /**
 * scopes & dynamic scopes
 *

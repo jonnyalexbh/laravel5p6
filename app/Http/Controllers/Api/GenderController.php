@@ -40,19 +40,9 @@ class GenderController extends ApiController
   * update
   *
   */
-  public function update(Request $request, $id)
+  public function update(Request $request, Gender $gender)
   {
-    $gender = Gender::findOrFail($id);
-
-    if ($request->has('name')) {
-      $gender->name = $request->name;
-    }
-
-    if (!$gender->isDirty()) {
-      return response()->json(['error' => 'You need to specify a different value to update', 'code' => 422], 422);
-    }
-
-    $gender->save();
+    $gender->update($request->all());
     return response()->json(['data' => $gender], 200);
   }
   /**
