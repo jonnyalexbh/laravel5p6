@@ -8,6 +8,7 @@ class Book extends Model
 {
   protected $table = 'books';
   public $timestamps = true;
+  protected $hidden = ['pivot'];
   protected $fillable = ['title', 'description', 'pages', 'date_of_publication'];
   /**
   * relationship categories Many To Many
