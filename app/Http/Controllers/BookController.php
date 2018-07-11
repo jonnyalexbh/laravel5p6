@@ -44,7 +44,8 @@ class BookController extends Controller
   */
   public function show($id)
   {
-    //
+    $book = Book::findOrFail($id);
+    return view('books.show',compact('book'));
   }
   /**
   * edit
@@ -52,7 +53,10 @@ class BookController extends Controller
   */
   public function edit($id)
   {
-    //
+    $book = Book::with('categories')->whereId($id)->first();
+    $book_categories= $book->categories->pluck('id')->toArray();
+    $categories = Category::all();
+    return view('books.edit', compact('book', 'book_categories', 'categories'));
   }
   /**
   * update
@@ -60,14 +64,23 @@ class BookController extends Controller
   */
   public function update(Request $request, $id)
   {
-    //
+    $book = Book::find($id);
+    $book->categories()->detach();
+
+    $book->update($request->all());
+    $book->categories()->attach($request->categories);
+
+    return redirect()->route('books.index')
+    ->with('success','Book updated successfully');
   }
   /**
   * destroy
   *
   */
-  public function destroy($id)
+  public function destroy(Book $book)
   {
-    //
+    $book->delete();
+    return redirect()->route('books.index')
+    ->with('success','Book deleted successfully');
   }
 }
