@@ -8,6 +8,7 @@ class Category extends Model
 {
   protected $table = 'categories';
   public $timestamps = true;
+  protected $fillable = ['name'];
   protected $hidden = ['pivot'];
   /**
   * relationship books Many To Many
