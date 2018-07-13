@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\User as UserResource;
 
 class UserController extends ApiController
 {
@@ -40,9 +41,9 @@ class UserController extends ApiController
   * show
   *
   */
-  public function show($id)
+  public function show(User $user)
   {
-    //
+    return new UserResource($user);
   }
 
   /**
