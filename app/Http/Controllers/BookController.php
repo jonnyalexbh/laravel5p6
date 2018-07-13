@@ -64,11 +64,10 @@ class BookController extends Controller
   */
   public function update(Request $request, $id)
   {
-    $book = Book::find($id);
-    $book->categories()->detach();
+    $book = Book::find($id);                          // $book->categories()->detach();
 
     $book->update($request->all());
-    $book->categories()->attach($request->categories);
+    $book->categories()->sync($request->categories);  // $book->categories()->attach($request->categories);
 
     return redirect()->route('books.index')
     ->with('success','Book updated successfully');
