@@ -26,6 +26,11 @@ Route::apiResources([
   'categories' => 'Api\CategoryController'
 ]);
 /**
+* auth.basic
+*
+*/
+Route::apiResource('genders-auth-basic', 'Api\GenderController')->middleware('auth.basic');
+/**
 * scopes & dynamic scopes
 *
 */

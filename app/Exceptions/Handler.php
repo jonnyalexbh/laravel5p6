@@ -4,10 +4,12 @@ namespace App\Exceptions;
 
 use Exception;
 use App\Traits\ApiResponser;
+use Illuminate\Http\Response;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
@@ -53,6 +55,11 @@ class Handler extends ExceptionHandler
   */
   public function render($request, Exception $exception)
   {
+    // UnauthorizedHttpException
+    if ($exception instanceof UnauthorizedHttpException) {
+      return new Response(['message' => 'Invalid credentials.'], 401, ['WWW-Authenticate' => 'Basic']);
+    }
+
     // the request contains a type (GET, PUT, POST etc) that is not used in this API
     if ($exception instanceof MethodNotAllowedHttpException) {
       return $this->errorResponse('The specified method for the request is invalid', 405);
