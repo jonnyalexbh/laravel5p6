@@ -31,8 +31,9 @@ class GenderController extends ApiController
   * show
   *
   */
-  public function show(Gender $gender)
+  public function show($id)
   {
+    $gender = Gender::find($id);
     return response()->json(['data' => $gender], 200);
   }
   /**
