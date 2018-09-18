@@ -6,6 +6,7 @@ use Exception;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
 use Illuminate\Database\QueryException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -81,6 +82,26 @@ class Handler extends ExceptionHandler
     return parent::render($request, $exception);
   }
   /**
+  * unauthenticated
+  *
+  */
+  protected function unauthenticated($request, AuthenticationException $exception)
+  {
+    if ($this->isFrontend($request)) {
+      return redirect()->guest('login');
+    }
+    return $this->errorResponse('Unauthenticated.', 401);
+  }
+  /**
+  * isFrontend
+  *
+  */
+  private function isFrontend($request)
+  {
+    // return true if the request accepts HTML and the middleware of the route contains the 'web' middleware
+    return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
+  }
+  /**
   * convertValidationExceptionToResponse
   *
   */
@@ -96,14 +117,5 @@ class Handler extends ExceptionHandler
     }
 
     return $this->errorResponse($errors, 422);
-  }
-  /**
-  * isFrontend
-  *
-  */
-  private function isFrontend($request)
-  {
-    // return true if the request accepts HTML and the middleware of the route contains the 'web' middleware
-    return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
   }
 }
