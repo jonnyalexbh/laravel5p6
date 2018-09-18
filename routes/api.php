@@ -41,3 +41,11 @@ Route::get('scope-user-active', function(){
 Route::get('scope-user-gender', function(){
   return \App\User::OfGender('2')->get();
 });
+/**
+* simple auth passport
+*
+*/
+Route::post('register-simple', 'Api\Auth\LoginSimpleController@register');
+Route::post('login-simple', 'Api\Auth\LoginSimpleController@login');
+Route::get('profile-simple', 'Api\Auth\LoginSimpleController@profile')->middleware('auth:api');
+Route::get('logout-simple', 'Api\Auth\LoginSimpleController@logout')->middleware('auth:api');
