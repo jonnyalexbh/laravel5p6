@@ -10,6 +10,16 @@ use App\Http\Controllers\ApiController;
 class GenderController extends ApiController
 {
   /**
+  * __construct
+  *
+  */
+  public function __construct()
+  {
+    $this->middleware('auth:api');
+    $this->middleware('scope:transaction-gender')->only('store', 'update', 'destroy');
+    $this->middleware('scope:consult-gender')->except('store', 'update', 'destroy');
+  }
+  /**
   * index
   *
   */

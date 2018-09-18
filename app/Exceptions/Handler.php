@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -56,6 +57,11 @@ class Handler extends ExceptionHandler
   */
   public function render($request, Exception $exception)
   {
+    // AuthorizationException
+    if ($exception instanceof AuthorizationException) {
+      return $this->errorResponse($exception->getMessage(), 403);
+    }
+
     // UnauthorizedHttpException
     if ($exception instanceof UnauthorizedHttpException) {
       return new Response(['message' => 'Invalid credentials.'], 401, ['WWW-Authenticate' => 'Basic']);

@@ -27,5 +27,10 @@ class AuthServiceProvider extends ServiceProvider
     $this->registerPolicies();
 
     Passport::routes();
+
+    Passport::tokensCan([
+      'consult-gender' => 'Consult gender',
+      'transaction-gender' => 'Transaction gender'
+    ]);
   }
 }
