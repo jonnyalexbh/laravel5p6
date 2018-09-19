@@ -32,3 +32,7 @@ Route::get('cat-destroy/{id}', 'CategoryController@destroy')->name('categories.d
 
 Route::get('password/expired', 'Auth\ExpiredPasswordController@expired')->name('password.expired');
 Route::post('password/post_expired', 'Auth\ExpiredPasswordController@postExpired')->name('password.post_expired');
+
+/** laravel socialite */
+Route::get('auth/{provider}', 'Auth\SocialProviderController@redirectToProvider')->name('social.auth');
+Route::get('auth/{provider}/callback', 'Auth\SocialProviderController@handleProviderCallback');

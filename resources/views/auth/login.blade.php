@@ -10,7 +10,7 @@
           <div class="card-body">
             <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
               @csrf
-              
+
               <div class="form-group row">
                 <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -59,6 +59,13 @@
                     {{ __('Forgot Your Password?') }}
                   </a>
                 </div>
+              </div>
+              
+              <div class="col-md-8 offset-md-4 py-3">
+                <a href="#" class="btn btn-danger btn-sm"><span class="fab fa-google fa-lg"></span> Google</a>
+                <a href="{{ route('social.auth', 'github') }}" class="btn btn-warning btn-sm"><span class="fab fa-github fa-lg"></span> Github</a>
+                <a href="#" class="btn btn-info btn-sm"><span class="fab fa-twitter fa-lg"></span> Twitter</a>
+                <a href="#" class="btn btn-primary btn-sm"><span class="fab fa-facebook-square fa-lg"></span> Facebook</a>
               </div>
             </form>
           </div>
