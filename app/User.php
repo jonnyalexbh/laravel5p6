@@ -47,6 +47,11 @@ class User extends Authenticatable
   {
     return $this->belongsTo('App\MaritalStatus');
   }
+
+  public function socialProviders()
+  {
+    return $this->hasMany('App\SocialProvider');
+  }
   /**
   * accessors
   *
