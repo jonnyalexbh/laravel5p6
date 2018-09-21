@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -44,9 +45,16 @@ class LoginController extends Controller
   */
   function authenticated(Request $request, $user)
   {
+    if($user->session_id) {
+      Session::getHandler()->destroy($user->session_id);
+    }
+
     $user->update([
       'last_login_at' => Carbon::now()->toDateTimeString(),
-      'last_login_ip' => $request->getClientIp()
+      'last_login_ip' => $request->getClientIp(),
+      'session_id' => session()->getId()
     ]);
+
+    return redirect()->intended($this->redirectPath());
   }
 }

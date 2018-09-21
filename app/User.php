@@ -12,14 +12,14 @@ class User extends Authenticatable
 
   const IS_ACTIVE = '1';
   const IS_NOT_ACTIVE = '0';
-
+  
   /**
   * The attributes that are mass assignable.
   *
   * @var array
   */
   protected $fillable = [
-    'name', 'email', 'password', 'phone', 'gender_id', 'last_login_at', 'last_login_ip', 'password_changed_at'
+    'name', 'email', 'password', 'phone', 'gender_id', 'last_login_at', 'last_login_ip', 'password_changed_at', 'session_id'
   ];
   /**
   * appending values to JSON
