@@ -60,9 +60,9 @@
                   </a>
                 </div>
               </div>
-              
+
               <div class="col-md-8 offset-md-4 py-3">
-                <a href="#" class="btn btn-danger btn-sm"><span class="fab fa-google fa-lg"></span> Google</a>
+                <a href="{{ route('social.auth', 'google') }}" class="btn btn-danger btn-sm"><span class="fab fa-google fa-lg"></span> Google</a>
                 <a href="{{ route('social.auth', 'github') }}" class="btn btn-warning btn-sm"><span class="fab fa-github fa-lg"></span> Github</a>
                 <a href="#" class="btn btn-info btn-sm"><span class="fab fa-twitter fa-lg"></span> Twitter</a>
                 <a href="#" class="btn btn-primary btn-sm"><span class="fab fa-facebook-square fa-lg"></span> Facebook</a>
