@@ -49,8 +49,8 @@ trait ApiResponser
       'error' => $error
     ];
 
-    foreach ($errorMessages->messages() as $key => $value) {
-      $errors[] = 'the field ' .$key. ' is empty';
+    foreach ($errorMessages->all() as $message) {
+      $errors[] = $message;
     }
 
     if(!empty($errorMessages)){

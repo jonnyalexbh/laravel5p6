@@ -50,7 +50,7 @@ class MaritalStatusController extends ApiController
     ]);
 
     if($validator->fails()){
-      return $this->validationErrors('Validation error.', $validator->errors());
+      return $this->validationErrors('required fields', $validator->messages());
     }
 
     if ($request->has('name')) {
