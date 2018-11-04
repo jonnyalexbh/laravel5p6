@@ -58,3 +58,9 @@ Route::get('logout-simple', 'Api\Auth\LoginSimpleController@logout')->middleware
  *
  */
 Route::get('comics', 'Api\MarvelController@index');
+
+/**
+ * read file
+ *
+ */
+Route::get('file-info', 'Api\ReadFileController@index');
