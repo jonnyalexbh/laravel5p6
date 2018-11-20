@@ -13,14 +13,14 @@ class ReadFileController extends ApiController
      */
     public function index()
     {
-        $file = File::get(storage_path('app/' . 'doc1.txt'));
+        $file = File::get(storage_path('app/' . 'factura2.txt'));
         $file = explode(PHP_EOL, $file);
 
         foreach ($file as $linea_num => $linea) {
 
             $data = explode('|', $linea);
 
-            switch (substr($linea[0], 0, 1)) {
+            switch (substr($data[0], 0, 1)) {
                 case 'H':
                     $result = $this->header($data);
                     break;
@@ -39,41 +39,41 @@ class ReadFileController extends ApiController
      */
     private function header($data)
     {
-        $result['tipoDocumento'] = ['codigo' => $data[2]];
+        $result['tipoDocumento'] = ['codigo' => $data[1]];
         $result['cliente'] = [
-            'tipoDePersona' => ['codigo' => 1],
-            'razonSocial' => 'AEI SAS',
-            'nombrePersonalizado' => 'aei',
-            'tipoDocumento' => ['codigo' => 11],
-            'numeroDocumento' => '001',
-            'tipoRegimen' => ['codigo' => 0],
-            'pais' => ['codigo' => 'CO'],
-            'departamento' => 'Antioquia',
-            'municipio' => 'Medellin',
-            'direccion' => 'Calle 59',
-            'telefono' => '32254312',
-            'correo' => 'aei@gmail.com',
-            'granContribuyente' => true,
-            'empresa' => ['numeroIdentificacion' => 2],
-            'nombre' => null,
-            'apellidos' => null,
+            'tipoDePersona' => ['codigo' => $data[2]],
+            'razonSocial' => $data[3],
+            'nombrePersonalizado' => $data[4],
+            'tipoDocumento' => ['codigo' => $data[5]],
+            'numeroDocumento' => $data[6],
+            'tipoRegimen' => ['codigo' => $data[7]],
+            'pais' => ['codigo' => $data[8]],
+            'departamento' => $data[9],
+            'municipio' => $data[10],
+            'direccion' => $data[11],
+            'telefono' => $data[12],
+            'correo' => $data[13],
+            'granContribuyente' => $data[14],
+            'empresa' => ['numeroIdentificacion' => $data[15]],
+            'nombre' => $data[16],
+            'apellidos' => $data[17],
         ];
         $result['informacionAdicional'] = 'Factura de venta';
-        $result['numeracion'] = ['codigo' => 29];
-        $result['numeroDocumento'] = '001';
-        $result['fechaEmision'] = '2018-03-19';
-        $result['horaEmision'] = '9:10:00';
-        $result['empresa'] = ['numeroIdentificacion' => 1];
-        $result['sucursal'] = ['codigo' => 1];
-        $result['nota'] = null;
-        $result['fechaVencimiento'] = '2018-12-01';
-        $result['fechaGeneracion'] = '2018-03-01';
-        $result['medioPago'] = ['codigo' => 10];
-        $result['estatusPago'] = 'Pagado';
-        $result['subtotal'] = '200000';
-        $result['impuesto'] = '38000';
-        $result['descuento'] = 0;
-        $result['moneda'] = ['codigo' => 'COP'];
+        $result['numeracion'] = ['codigo' => $data[18]];
+        $result['numeroDocumento'] = $data[19];
+        $result['fechaEmision'] = $data[20];
+        $result['horaEmision'] = $data[21];
+        $result['empresa'] = ['numeroIdentificacion' => $data[22]];
+        $result['sucursal'] = ['codigo' => $data[23]];
+        $result['nota'] = $data[24];
+        $result['fechaVencimiento'] = $data[25];
+        $result['fechaGeneracion'] = $data[26];
+        $result['medioPago'] = ['codigo' => $data[27]];
+        $result['estatusPago'] = $data[28];
+        $result['subtotal'] = $data[29];
+        $result['impuesto'] = $data[30];
+        $result['descuento'] = $data[31];
+        $result['moneda'] = ['codigo' => $data[31]];
 
         return $result;
     }
@@ -86,13 +86,13 @@ class ReadFileController extends ApiController
         return [
             'producto' => $data[1],
             'cantidad' => $data[2],
-            'descripcion' => '',
-            'valorUnitario' => '',
-            'porcentajeImpuesto' => '',
-            'valorImpuesto' => '',
-            'impuesto' => ['codigo' => 1],
-            'descuento' => '',
-            'unidadMedida' => ['codigo' => 1],
+            'descripcion' => $data[3],
+            'valorUnitario' => $data[4],
+            'porcentajeImpuesto' => $data[5],
+            'valorImpuesto' => $data[6],
+            'impuesto' => ['codigo' => $data[7]],
+            'descuento' => $data[8],
+            'unidadMedida' => ['codigo' => $data[9]],
         ];
     }
 }
