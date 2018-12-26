@@ -9,10 +9,10 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
-  return view('welcome');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -36,3 +36,6 @@ Route::post('password/post_expired', 'Auth\ExpiredPasswordController@postExpired
 /** laravel socialite */
 Route::get('auth/{provider}', 'Auth\SocialProviderController@redirectToProvider')->name('social.auth');
 Route::get('auth/{provider}/callback', 'Auth\SocialProviderController@handleProviderCallback');
+
+Route::get('rollbar', 'RollbarController@basic');
+Route::get('rollbar-with-data', 'RollbarController@withData');
