@@ -37,5 +37,8 @@ Route::post('password/post_expired', 'Auth\ExpiredPasswordController@postExpired
 Route::get('auth/{provider}', 'Auth\SocialProviderController@redirectToProvider')->name('social.auth');
 Route::get('auth/{provider}/callback', 'Auth\SocialProviderController@handleProviderCallback');
 
+/** firestore */
+Route::get('shortcuts', 'FirestoreController@shortcuts');
+
 Route::get('rollbar', 'RollbarController@basic');
 Route::get('rollbar-with-data', 'RollbarController@withData');
