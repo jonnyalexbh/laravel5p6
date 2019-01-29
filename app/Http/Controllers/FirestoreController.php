@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Google\Cloud\Core\ServiceBuilder;
-use Storage;
+use App\Traits\Firestore;
 
 class FirestoreController extends Controller
 {
+    use Firestore;
+
     /**
      * shortcuts
      *
      */
     public function shortcuts()
     {
-        $path = Storage::get('laravel5p6-229722-e63905cddaca.json');
+        $firestore = $this->initialize();
 
-        $cloud = new ServiceBuilder([
-            'keyFile' => json_decode($path, true),
-        ]);
-
-        $this->firestore = $cloud->firestore();
-
-        $shortcuts = $this->firestore
+        $shortcuts = $firestore
             ->collection("countries")
             ->document('ar')
             ->collection("profiles")
