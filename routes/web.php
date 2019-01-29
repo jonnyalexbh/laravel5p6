@@ -39,6 +39,7 @@ Route::get('auth/{provider}/callback', 'Auth\SocialProviderController@handleProv
 
 /** firestore */
 Route::get('shortcuts', 'FirestoreController@shortcuts');
+Route::get('remote-config', 'FirestoreController@remoteConfig');
 
 Route::get('rollbar', 'RollbarController@basic');
 Route::get('rollbar-with-data', 'RollbarController@withData');

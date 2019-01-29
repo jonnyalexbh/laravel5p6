@@ -12,6 +12,7 @@
     "fideloper/proxy": "^4.0",
     "google/cloud-firestore": "^0.15.8",
     "guzzlehttp/guzzle": "^6.3",
+    "kreait/firebase-php": "^4.18",
     "laravel/framework": "5.6.*",
     "laravel/passport": "^6.0",
     "laravel/socialite": "^3.1",

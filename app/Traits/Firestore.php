@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use Google\Cloud\Core\ServiceBuilder;
-use Storage;
 
 trait Firestore
 {
@@ -13,7 +12,7 @@ trait Firestore
      */
     public function initialize()
     {
-        $path = Storage::get('laravel5p6-229722-e63905cddaca.json');
+        $path = file_get_contents(base_path() . '/laravel5p6-229722-e63905cddaca.json');
 
         $cloud = new ServiceBuilder([
             'keyFile' => json_decode($path, true),
